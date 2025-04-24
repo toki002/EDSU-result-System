@@ -1,0 +1,162 @@
+.bgslidemenu{
+    font: bold 16px 'Bitter' ,sans-serif;/*google font*/
+    position: relative;
+    width: 100%;
+}
+.bgslidemenu:after{/*clear menu*/
+    content: '';
+    clear: both;
+    display: block;
+}
+/*Top level menu*/
+.bgslidemenu ul{
+    z-index: 100;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    list-style: none;
+    float: right;/*change to left to left align menu */
+}
+/*Top level list item*/
+.bgslidemenu ul li{
+    position: relative;
+    display: inline;
+    margin-right: 20px;
+    float: left;
+}
+
+/*Top level menu items link style */
+.bgslidemenu ul li a{
+    display: block;
+    position: relative;
+    color: black;
+    color: white;
+    padding: 14px 10px;
+    text-decoration: none;
+}
+.bgslidemenu ul li a:link, .bgslidemenu ul li a:visited{
+    color: black;
+}
+/* Top level menuu items links style on hover */
+.bgslidemenu ul li:hover > a {
+    color: purple !important;
+
+}
+/* li links with no sub ul style */
+.bgslidemenu ul li > a:only-child{
+    /*undo padding for none sublinks*/
+    padding-right: 25px;
+}
+/* links with a sub ul pseudo class(Add drop down arrow) */
+.bgslidemenu ul li > a:after{
+    /*add arrow inside Lis */
+    content: "";
+    position: absolute;
+    height: 0;
+    width: 0;
+    border: 5px solid transparent;
+    border-top-color: black;
+    top: 50%;
+    transform: translateY(-20%);
+    right: 8px;
+}
+
+/*lis links with no sub ul pseudoclass */
+.bgslidemenu ul li > a:only-child:after{
+    /*undo arrow for non submenu lis*/
+    display: none;
+}
+
+/*sub uls style*/
+.bgslidemenu ul li ul{
+    position: absolute;
+    left: -5000px;
+    top: auto;
+    opacity: 0;
+    width: 200px; /*width of dropdown*/
+    visibility: hidden;
+    padding-top: 80px;/*Add large paddimg to dropdown menu*/
+    z-index: -1;
+    background-color: #f3f3f3;
+    transform:translateY(100px); 
+    /* transform: transition opacity .3s,transform.5s,visibility 0s .3s,visibility .0s.3s,left 0s .3s; */
+    -webkit-transition: opacity .3s, transform .5s,visibility 0s .3s, left 0s .3s;
+    transition: opacity .3s, transform 5s, visibility 0s .3s, left 0s .3s;
+
+}
+
+/*sub ul style on hover*/
+.bgslidemenu ul li:hover > ul{
+    visibility: visible;
+    left: -3opx;
+    transform: translateY(-80px);/*move dropdown menu upwards,should be smaller than padding top value above*/
+    opacity: 1;
+    -webkit-transition: opacity 1s, transform .5s;
+    transition:opacity .1s,transform .5s
+}
+
+/*sublevel menu list item(alter  style from top level list)*/
+.bgslidemenu ul li ul li{
+    display: list-item;
+    float: none;
+    overflow: hidden;
+}
+
+/*Add animated line to submenu item on mouseover */
+.bgslidemenu ul li ul li:after{
+    content: ' ';
+    position: absolute;
+    width: 30px;
+    height: 5px;
+    background-color: purple;
+    left: 0;
+    top: 50%;
+    transform: translate3d(-100%,-50%,0);
+    transition: transform .3s;
+
+}
+.bgslidemenu ul ul li:hover:after{
+    transform: translate3d(0,-50%,0);
+}
+
+/*sublevels link style on hover and when active*/
+.bgslidemenu ul ul li:hover > a{
+    color: purple !important;
+}
+
+/*sublevel menu links style*/
+.bgslidemenu ul li ul li a{
+    font: normal 16px 'Bitter',sans-serif;
+    padding: 10px;
+    padding-left: 40px;
+    /*Add left padding to submenu links to accomodate animated links*/
+    position: relative;
+    margin: 0;
+}
+/*#### responsive layout css##*/
+ @media (max-width:700px){
+    
+    .bgslidemenu ul{
+        float: none;
+    }
+    
+}
+.bgslidemenu ul li ul{
+    width: 100%;
+    position: relative;
+    border-top: 2px solid #eee;
+    /*change menu reveal type from "visibility" to "display"  former seems to cause browser to jump to top*/
+display: none;
+}
+.bgslidemenu ul li:hover>ul{
+    display: block;
+    padding-top: 0;
+    transform: none;
+    z-index: 10000;
+    left: 0 !important;
+    top: auto;    
+}
+.bgslidemenu ul ul li:hover>ul{
+    left: 0 !important;
+    top: auto;
+}
